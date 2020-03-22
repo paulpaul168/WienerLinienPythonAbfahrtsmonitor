@@ -1,6 +1,8 @@
+from tkinter import *
 import tkinter, json, urllib.request
 
 TIME_RESTART = 20000 #in ms
+myFont = ("Times New Roman", 72)
 
 def getResponse(url):
     operUrl = urllib.request.urlopen(url)
@@ -10,6 +12,20 @@ def getResponse(url):
        print("Error receiving data", operUrl.getcode())
     return data
 
+def drawData(D_1, D_2):
+	dwagen = Label(monitor,text="D ", fg="White", font=myFont, bg="Black")
+	dwagen.place(x=width*0.15,y=height*0.15)
+	dwagen_T = Label(monitor,text=str(D_1)+" min", fg="White", font=myFont, bg="Black")
+	dwagen_T.place(x=width*0.75,y=height*0.15)
+	dwagen2 = Label(monitor,text="D ", fg="White", font=myFont, bg="Black")
+	dwagen2.place(x=width*0.15,y=height*0.5)
+	dwagen2_T = Label(monitor,text=str(D_2)+" min", fg="White", font=myFont, bg="Black")
+	dwagen2_T.place(x=width*0.75,y=height*0.5)
+
+	b400 = Label(monitor,text="400 ", fg="White", font=myFont, bg="Black")
+	b400.place(x=width*0.15,y=height*0.75)
+	monitor.after(TIME_RESTART, updateData)
+
 
 def updateData():
 	nussdorf = getResponse('https://www.wienerlinien.at/ogd_realtime/monitor?rbl=90')
@@ -17,7 +33,7 @@ def updateData():
 	D_1 = j_obj_nussdorf['data']['monitors'][0]['lines'][0]['departures']['departure'][0]['departureTime']['countdown']
 	D_2 = j_obj_nussdorf['data']['monitors'][0]['lines'][0]['departures']['departure'][1]['departureTime']['countdown']
 	print("D1: "+str(D_1)+"min ; D2: "+str(D_2)+"min")
-	monitor.after(TIME_RESTART, updateData)
+	drawData(D_1,D_2)
 
 
 if __name__ == "__main__":
