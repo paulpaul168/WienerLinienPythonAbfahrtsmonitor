@@ -1,5 +1,5 @@
 from tkinter import *
-import tkinter, json, urllib.request
+import json, urllib.request, time
 
 TIME_RESTART = 20000 #in ms
 myFont = ("Times New Roman", 72)
@@ -14,16 +14,16 @@ def getResponse(url):
 
 def drawData(D_1, D_2):
 	dwagen = Label(monitor,text="D ", fg="White", font=myFont, bg="Black")
-	dwagen.place(x=width*0.15,y=height*0.15)
+	dwagen.place(x=width*0.1,y=height*0.15)
 	dwagen_T = Label(monitor,text=str(D_1)+" min", fg="White", font=myFont, bg="Black")
 	dwagen_T.place(x=width*0.75,y=height*0.15)
 	dwagen2 = Label(monitor,text="D ", fg="White", font=myFont, bg="Black")
-	dwagen2.place(x=width*0.15,y=height*0.5)
+	dwagen2.place(x=width*0.1,y=height*0.4)
 	dwagen2_T = Label(monitor,text=str(D_2)+" min", fg="White", font=myFont, bg="Black")
-	dwagen2_T.place(x=width*0.75,y=height*0.5)
+	dwagen2_T.place(x=width*0.75,y=height*0.4)
 
 	b400 = Label(monitor,text="400 ", fg="White", font=myFont, bg="Black")
-	b400.place(x=width*0.15,y=height*0.75)
+	b400.place(x=width*0.1,y=height*0.65)
 	monitor.after(TIME_RESTART, updateData)
 
 
@@ -35,12 +35,19 @@ def updateData():
 	print("D1: "+str(D_1)+"min ; D2: "+str(D_2)+"min")
 	drawData(D_1,D_2)
 
+def updateClock():
+	now = time.strftime("%H:%M:%S")
+	clock_label.configure(text=now)
+	monitor.after(1000, updateClock)
 
 if __name__ == "__main__":
-	monitor = tkinter.Tk()
+	monitor = Tk()
 	monitor.configure(background='black')
 	monitor.attributes("-fullscreen",True)
 	width = monitor.winfo_screenwidth()
 	height = monitor.winfo_screenheight()
+	clock_label = Label(monitor,text=" ", fg="White", font=myFont, bg="Black")
+	clock_label.place(x=width*0.35,y=height*0.05)
 	monitor.after(TIME_RESTART, updateData)
+	monitor.after(1000, updateClock)
 	monitor.mainloop()
