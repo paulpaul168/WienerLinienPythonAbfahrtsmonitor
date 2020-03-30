@@ -14,13 +14,13 @@ def getResponse(url):
 
 def drawData(D_1, D_2):
 	dwagen = Label(monitor,text="D ", fg="White", font=myFont, bg="Black")
-	dwagen.place(x=width*0.1,y=height*0.25)
+	dwagen.place(x=width*0.07,y=height*0.25)
 	dwagen_T = Label(monitor,text=str(D_1)+" min", fg="White", font=myFont, bg="Black")
-	dwagen_T.place(x=width*0.75,y=height*0.25)
+	dwagen_T.place(x=width*0.7,y=height*0.25)
 	dwagen2 = Label(monitor,text="D ", fg="White", font=myFont, bg="Black")
-	dwagen2.place(x=width*0.1,y=height*0.55)
+	dwagen2.place(x=width*0.07,y=height*0.55)
 	dwagen2_T = Label(monitor,text=str(D_2)+" min", fg="White", font=myFont, bg="Black")
-	dwagen2_T.place(x=width*0.75,y=height*0.55)
+	dwagen2_T.place(x=width*0.7,y=height*0.55)
 
 #	b400 = Label(monitor,text="400 ", fg="White", font=myFont, bg="Black")
 #	b400.place(x=width*0.1,y=height*0.65)
