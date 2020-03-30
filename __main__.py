@@ -1,5 +1,5 @@
 from tkinter import *
-import json, urllib.request, time
+import json, urllib.request, time, os
 
 TIME_RESTART = 20000 #in ms
 myFont = ("Times New Roman", 72)
@@ -52,8 +52,10 @@ if __name__ == "__main__":
 	height = monitor.winfo_screenheight()
 	clock_label = Label(monitor,text=" ", fg="White", font=myFont, bg="Black")
 	clock_label.place(x=width*0.35,y=height*0.05)
-	loading_label = Label(monitor,text="Loading...", fg="White", font=myFont, bg="Black")
+	loading_label = Label(monitor,text="Updating...", fg="White", font=myFont, bg="Black")
 	loading_label.place(x=width*0.35,y=height*0.35)
+	os.system("(cd ~/WienerLinienPythonAbfahrtsmonitor/ && git pull)")
+	loading_label.configure(text="Loading...")
 	monitor.after(TIME_RESTART, updateData)
 	monitor.after(1000, updateClock)
 	monitor.mainloop()
