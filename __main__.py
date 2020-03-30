@@ -35,6 +35,7 @@ def updateData():
 		D_2 = j_obj_nussdorf['data']['monitors'][0]['lines'][0]['departures']['departure'][1]['departureTime']['countdown']
 		print("D1: "+str(D_1)+"min ; D2: "+str(D_2)+"min")
 		drawData(D_1,D_2)
+		loading_label.configure(text=" ")
 	except:
 		dwagen = Label(monitor,text="Error! ", fg="White", font=myFont, bg="Black")
 		dwagen.place(x=width*0.1,y=height*0.25)
@@ -51,6 +52,8 @@ if __name__ == "__main__":
 	height = monitor.winfo_screenheight()
 	clock_label = Label(monitor,text=" ", fg="White", font=myFont, bg="Black")
 	clock_label.place(x=width*0.35,y=height*0.05)
+	loading_label = Label(monitor,text="Loading...", fg="White", font=myFont, bg="Black")
+	loading_label.place(x=width*0.35,y=height*0.35)
 	monitor.after(TIME_RESTART, updateData)
 	monitor.after(1000, updateClock)
 	monitor.mainloop()
