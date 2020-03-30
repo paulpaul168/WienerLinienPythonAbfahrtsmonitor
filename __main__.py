@@ -52,7 +52,11 @@ if __name__ == "__main__":
 	height = monitor.winfo_screenheight()
 	clock_label = Label(monitor,text=" ", fg="White", font=myFont, bg="Black")
 	clock_label.place(x=width*0.35,y=height*0.05)
+<<<<<<< HEAD
 	loading_label = Label(monitor,text="Updating...", fg="White", font=myFont, bg="Black")
+=======
+	loading_label = Label(monitor,text="-Loading-", fg="White", font=myFont, bg="Black")
+>>>>>>> 5ddd48b20b0c38973c7be6c7fe9a3b2f4cf26a23
 	loading_label.place(x=width*0.35,y=height*0.35)
 	os.system("(cd ~/WienerLinienPythonAbfahrtsmonitor/ && git pull)")
 	loading_label.configure(text="Loading...")
