@@ -13,15 +13,8 @@ def getResponse(url):
     return data
 
 def drawData(D_1, D_2):
-	dwagen = Label(monitor,text="D ", fg="White", font=myFont, bg="Black")
-	dwagen.place(x=width*0.07,y=height*0.25)
-	dwagen_T = Label(monitor,text=str(D_1)+" min", fg="White", font=myFont, bg="Black")
-	dwagen_T.place(x=width*0.7,y=height*0.25)
-	dwagen2 = Label(monitor,text="D ", fg="White", font=myFont, bg="Black")
-	dwagen2.place(x=width*0.07,y=height*0.55)
-	dwagen2_T = Label(monitor,text=str(D_2)+" min", fg="White", font=myFont, bg="Black")
-	dwagen2_T.place(x=width*0.7,y=height*0.55)
-
+	dwagen_T.configure(text=str(D_1))
+	dwagen2_T.configure(text=str(D_2))
 #	b400 = Label(monitor,text="400 ", fg="White", font=myFont, bg="Black")
 #	b400.place(x=width*0.1,y=height*0.65)
 	monitor.after(TIME_RESTART, updateData)
@@ -37,8 +30,8 @@ def updateData():
 		drawData(D_1,D_2)
 		loading_label.configure(text=" ")
 	except:
-		dwagen = Label(monitor,text="Error! ", fg="White", font=myFont, bg="Black")
-		dwagen.place(x=width*0.1,y=height*0.25)
+		dwagen.configure(text="Error!")
+
 def updateClock():
 	now = time.strftime("%H:%M:%S")
 	clock_label.configure(text=now)
@@ -57,6 +50,15 @@ if __name__ == "__main__":
 	time.sleep(0.5)
 	os.system("cd ~/WienerLinienPythonAbfahrtsmonitor/ && git pull")
 	loading_label.configure(text="Loading...")
+	dwagen = Label(monitor,text="D ", fg="White", font=myFont, bg="Black")
+	dwagen.place(x=width*0.07,y=height*0.25)
+	dwagen_T = Label(monitor,text="? min", fg="White", font=myFont, bg="Black")
+	dwagen_T.place(x=width*0.7,y=height*0.25)
+	dwagen2 = Label(monitor,text="D ", fg="White", font=myFont, bg="Black")
+	dwagen2.place(x=width*0.07,y=height*0.55)
+	dwagen2_T = Label(monitor,text="? min", fg="White", font=myFont, bg="Black")
+	dwagen2_T.place(x=width*0.7,y=height*0.55)
+
 	monitor.after(TIME_RESTART, updateData)
 	monitor.after(1000, updateClock)
 	monitor.mainloop()
