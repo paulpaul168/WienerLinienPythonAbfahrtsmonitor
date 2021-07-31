@@ -13,8 +13,8 @@ def getResponse(url):
     return data
 
 def drawData(D_1, D_2):
-	dwagen_T.configure(text=str(D_1))
-	dwagen2_T.configure(text=str(D_2))
+	dwagen_T.configure(text=str(D_1)+ "min")
+	dwagen2_T.configure(text=str(D_2)+ "min")
 #	b400 = Label(monitor,text="400 ", fg="White", font=myFont, bg="Black")
 #	b400.place(x=width*0.1,y=height*0.65)
 	monitor.after(TIME_RESTART, updateData)
