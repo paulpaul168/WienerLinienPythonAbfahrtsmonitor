@@ -24,11 +24,16 @@ def updateData():
 	try:
 		nussdorf = getResponse('https://www.wienerlinien.at/ogd_realtime/monitor?rbl=90')
 		j_obj_nussdorf = json.loads(nussdorf.decode())
-		D_1 = j_obj_nussdorf['data']['monitors'][0]['lines'][0]['departures']['departure'][0]['departureTime']['countdown']
-		D_2 = j_obj_nussdorf['data']['monitors'][0]['lines'][0]['departures']['departure'][1]['departureTime']['countdown']
+		if len(j_obj_nussdorf['data']['monitors'][0]['lines'][0]['departures']['departure']) == 2:
+			D_1 = j_obj_nussdorf['data']['monitors'][0]['lines'][0]['departures']['departure'][0]['departureTime']['countdown']
+			D_2 = j_obj_nussdorf['data']['monitors'][0]['lines'][0]['departures']['departure'][1]['departureTime']['countdown']
+		else:
+			D_1 = j_obj_nussdorf['data']['monitors'][0]['lines'][0]['departures']['departure'][0]['departureTime']['countdown']
+			D_2 = D_1
 		print("D1: "+str(D_1)+"min ; D2: "+str(D_2)+"min")
 		drawData(D_1,D_2)
 		loading_label.configure(text=" ")
+		dwagen.configure(text="D ")
 	except:
 		dwagen.configure(text="Error!")
 
