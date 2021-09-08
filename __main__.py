@@ -24,7 +24,7 @@ def updateData():
 	try:
 		nussdorf = getResponse('https://www.wienerlinien.at/ogd_realtime/monitor?rbl=90')
 		j_obj_nussdorf = json.loads(nussdorf.decode())
-		if len(j_obj_nussdorf['data']['monitors'][0]['lines'][0]['departures']['departure']) == 2:
+		if len(j_obj_nussdorf['data']['monitors'][0]['lines'][0]['departures']['departure']) >= 2:
 			D_1 = j_obj_nussdorf['data']['monitors'][0]['lines'][0]['departures']['departure'][0]['departureTime']['countdown']
 			D_2 = j_obj_nussdorf['data']['monitors'][0]['lines'][0]['departures']['departure'][1]['departureTime']['countdown']
 		else:
